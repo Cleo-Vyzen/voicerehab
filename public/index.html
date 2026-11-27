@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VoiceRehab — your voice-guided physio exercises</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><span class="logo">●</span> VoiceRehab</div>
+    <label class="who">Patient
+      <select id="patientSel" aria-label="Choose patient"></select>
+    </label>
+    <a class="link" href="dashboard.html">Clinic dashboard →</a>
+  </header>
+
+  <main class="wrap">
+    <div id="banner" class="banner" hidden></div>
+
+    <!-- Home -->
+    <section id="home" class="card center">
+      <p class="muted">Namaste,</p>
+      <h1 id="pname"></h1>
+      <p id="pcond" class="muted"></p>
+      <h3>Today's exercises</h3>
+      <ul id="planList" class="plan"></ul>
+      <p id="reminderInfo" class="pill"></p>
+    </section>
+
+    <!-- Session -->
+    <section id="session" class="card center" hidden>
+      <div class="bar"><div id="overall" class="fill"></div></div>
+      <p id="exCount" class="muted"></p>
+      <h2 id="exName"></h2>
+      <p id="exInstr" class="instr"></p>
+      <div class="rep"><span id="rep">0</span> <small id="repOf"></small></div>
+      <div class="bar thin"><div id="repBar" class="fill"></div></div>
+      <p id="exState" class="muted"></p>
+    </section>
+
+    <!-- Summary -->
+    <section id="summary" class="card center" hidden>
+      <h2 id="sumTitle"></h2>
+      <ul id="sumList" class="sum"></ul>
+      <p id="sumNote" class="muted"></p>
+      <button id="againBtn" class="btn">Back to home</button>
+    </section>
+
+    <!-- Conversation -->
+    <section class="talk" aria-live="polite">
+      <button id="micBtn" class="mic" aria-label="Tap to talk">
+        <svg viewBox="0 0 24 24" width="44" height="44" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>
+      </button>
+      <div id="listening" class="listening" hidden><i></i><i></i><i></i> Listening…</div>
+      <p id="botSays" class="bot"></p>
+      <p id="youSaid" class="you"></p>
+      <div id="options" class="options"></div>
+      <form id="typeForm" class="type">
+        <input id="typeInput" placeholder="Or type what you would say…" autocomplete="off">
+        <button class="btn small">Send</button>
+      </form>
+      <button id="stopBtn" class="btn ghost" hidden>Stop session</button>
+      <p class="hint">Try: "Start my exercises" · "Ready" · "Repeat" · "Slower" · "Skip" · "Call my physio" · "Remind me at 7 in the morning"</p>
+    </section>
+  </main>
+
+  <script src="js/data.js"></script>
+  <script src="js/voice.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

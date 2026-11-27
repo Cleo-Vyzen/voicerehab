@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VoiceRehab — clinic dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><span class="logo">●</span> VoiceRehab <span class="muted">· Clinic</span></div>
+    <a class="link" href="index.html">← Patient app</a>
+  </header>
+  <main class="wrap wide">
+    <section class="stats">
+      <div class="card stat"><p class="muted">Done today</p><b id="statDone">–</b></div>
+      <div class="card stat"><p class="muted">Urgent flags</p><b id="statFlags">–</b></div>
+      <div class="card stat"><p class="muted">Avg adherence (14 days)</p><b id="statAdh">–</b></div>
+    </section>
+    <h2>Patients <span class="muted small">· most urgent first</span></h2>
+    <div id="patients"></div>
+    <button id="resetBtn" class="btn ghost">Reset demo data</button>
+  </main>
+  <script src="js/data.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
