@@ -134,7 +134,8 @@
 
     for (;;) {
       const it = await ask(intro, {
-        allowed: ['ready', 'repeat', 'slower', 'faster', 'skip', 'stop', 'call'],
+        // Specific commands first, so "please go slower" isn't read as "go" (ready).
+        allowed: ['call', 'stop', 'slower', 'faster', 'skip', 'repeat', 'ready'],
         options: ['Ready', 'Repeat', 'Skip', 'Stop'],
         short: "Say ready when you're ready.",
       });
@@ -166,7 +167,7 @@
         short: 'How much pain, from 0 to 10?',
       });
       const ok = await ask('Pain ' + pain + '. Is that right?', {
-        allowed: ['yes', 'no'], options: ['Yes', 'No'], short: 'Pain ' + pain + '. Yes or no?',
+        allowed: ['no', 'yes'], options: ['Yes', 'No'], short: 'Pain ' + pain + '. Yes or no?',
       });
       if (ok === 'yes') break;
       await say("Okay, let's try again.");
