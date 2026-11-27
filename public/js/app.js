@@ -30,7 +30,10 @@
         b.type = 'button';
         b.className = 'opt';
         b.textContent = label;
-        b.onclick = () => VR.voice.provide(label);
+        b.onclick = () => {
+          if (S.running || VR.voice._pending) VR.voice.provide(label);
+          else homeCommand([label.toLowerCase()]);
+        };
         box.appendChild(b);
       });
     },
@@ -320,7 +323,8 @@
       const text = input.value.trim();
       input.value = '';
       if (!text) return;
-      if (!VR.voice.provide(text) && !S.running) { VR.ui.heard(text); homeCommand([text.toLowerCase()]); }
+      if (S.running || VR.voice._pending) VR.voice.provide(text);
+      else { VR.ui.heard(text); homeCommand([text.toLowerCase()]); }
     };
 
     if (!VR.voice.supported) {

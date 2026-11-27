@@ -44,6 +44,11 @@
     // Listen once. Resolves with {alts, source} or null if the patient said nothing.
     // Taps on fallback buttons and typed text also resolve it (see provide()).
     listen(timeoutMs) {
+      if (this._queued) {
+        const q = this._queued;
+        this._queued = null;
+        return Promise.resolve(q);
+      }
       return new Promise((resolve) => {
         let settled = false;
         let rec = null;
@@ -89,14 +94,16 @@
     },
 
     // Called by fallback buttons or the type box.
+    // If the app is still speaking, the answer is kept and used by the next listen().
     provide(text) {
-      if (!this._pending) return false;
       VR.ui.heard(text);
-      this._pending({ alts: [clean(text)], source: 'tap' });
-      return true;
+      const val = { alts: [clean(text)], source: 'tap' };
+      if (this._pending) this._pending(val);
+      else this._queued = val;
     },
 
     cancelListen() {
+      this._queued = null;
       if (this._pending) this._pending(null);
     },
   };
