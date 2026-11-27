@@ -33,7 +33,7 @@
         u.onend = finish;
         u.onerror = finish;
         setTimeout(finish, 2000 + text.length * 90); // safety net if onend never fires
-        speechSynthesis.speak(u);
+        try { speechSynthesis.speak(u); } catch (e) { /* speech engine failed: text stays on screen */ }
       });
     },
 
